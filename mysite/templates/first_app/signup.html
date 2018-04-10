@@ -1,0 +1,35 @@
+{% extends "first_app/base.html" %}
+    {% block header %}
+    <br>
+    <br>
+      {% endblock %}
+      {% block content %}
+    <!-- SignUp Section -->
+    <section  id='signin_section' >
+
+      <div class="jumbotron container">
+        {% if registered %}
+        <h1>Thank You for registering!</h1>
+        <a href="{% url 'first_app:login' %}">Now You can Login Here</a>
+        <br>
+        <a href="{% url 'first_app:index' %}">Go to Home</a>
+        {% else %}
+          <h1 style="text-align:center;">Sign Up Here!</h1>
+          <form   enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit"  value="register">
+          </form>
+        {% endif %}
+      </div>
+    </section>
+    {% endblock %}
+
+    {% block navbarr %}
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item mx-0 mx-lg-1">
+        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href = "{% url 'first_app:login' %}" >Login</a>
+      </li>
+    </ul>
+    {% endblock %}

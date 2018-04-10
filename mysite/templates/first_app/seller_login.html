@@ -1,0 +1,47 @@
+{% extends "first_app/base.html" %}
+    {% block header %}
+    <br>
+    <br>
+    {% endblock %}
+
+    {% block content %}
+    <!-- Login Section -->
+    <section >
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">Login</h2>
+        <hr class="star-dark mb-5">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+            <form action="{% url 'first_app:seller_login'%}" method="POST">
+              {% csrf_token %}
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Username</label>
+                  <input name = 'username' class="form-control" id="username" type="text" placeholder="Username" required="required" data-validation-required-message="Please enter your Username.">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                  <label>Password</label>
+                  <input name='password' class="form-control" id="password" type="password" placeholder="Password" required="required" data-validation-required-message="Please enter your Password.">
+                  <p class="help-block text-danger"></p>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group" style="text-align:center;">
+                <button type="submit" class="btn btn-primary btn-xl"  id="sendMessageButton" >Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endblock %}
+
+  {% block navbarr %}
+  {%endblock%}

@@ -1,0 +1,37 @@
+{% extends "first_app/base.html" %}
+
+{% block navbarr %}
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item mx-0 mx-lg-1">
+      <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url "first_app:seller_logout"%}">Seller Logout</a>
+    </li>
+  </ul>
+{%endblock%}
+
+{% block content %}
+
+  <section>
+    <div class="container jumbotron" id="dashboard_div">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          {% if user.is_authenticated %}
+          Username : {{ user.username }} <br><br>
+          First Name :{{ user.first_name }} <br><br>
+          Last Name:{{ user.last_name }} <br><br>
+          Email :{{ user.email }} <br><br>
+          Age :{{ user.userprofileinfo.user_age }} <br><br>
+          Phone No: {{ user.userprofileinfo.user_phone_no }} <br><br>
+          User Type :--==> {{ user.userprofileinfo.type_of_user|upper }}
+          {% else %}
+          {% endif %}
+        </div>
+        <a href="{% url 'first_app:product_adder_page' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" style="margin:70px; ">Add New Product</a>
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block header%}
+{% endblock %}

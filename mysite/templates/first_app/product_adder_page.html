@@ -1,0 +1,28 @@
+{% extends "first_app/base.html" %}
+    {% block header %}
+    <br>
+    <br>
+      {% endblock %}
+      {% block content %}
+    <!-- SignUp Section -->
+    <section  id='signin_section' >
+
+      <div class="jumbotron container">
+        {% if registered %}
+        <h1>Thank You for Adding New Product!</h1>
+        <a href="{% url 'first_app:seller_dashbord' %}">Go to your dashbord</a>
+        <br>
+        {% else %}
+          <h1 style="text-align:center;">Add New Product Here!</h1>
+          <form   enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ product_form.as_p }}
+            <input type="submit"  value="Add Product">
+          </form>
+        {% endif %}
+      </div>
+    </section>
+    {% endblock %}
+
+    {% block navbarr %}
+    {% endblock %}

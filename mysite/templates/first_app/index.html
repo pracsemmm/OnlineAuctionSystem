@@ -1,0 +1,70 @@
+{% extends "first_app/base.html" %}
+{% block content %}
+<section>
+  <div class="container">
+    <h2 class="text-center text-secondary mb-0">Currently Available Products</h2>
+    <hr class="star-dark mb-5">
+  {% for product in all_products %}
+    <div class="row" style="margin-left:14rem;">
+      <div class="card col-sm-10" style="width: 18rem;">
+          <img class="card-img-top" style="max-height: 300px;" src="/media/{{product.product_image}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"> {{ product.product_name}}</h5>
+            <p class="card-text">Describtion: {{product.product_description}}</p>
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item">  Add Time : {{product.add_time}}</li>
+               <li class="list-group-item">  Minimum Allowed Bid: {{ product.min_bid }}</li>
+               <li class="list-group-item">Time Limit : {{ product.time_limit }}</li>
+               <li class="list-group-item">Seller Username : {{ product.seller_name }}</li>
+                <li class="list-group-item">Seller Username : {{ product.id }}</li>
+             </ul>
+             <div class="bid_div_button">
+               <a type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                {% if request.user.is_authenticated %}
+                 onclick="bid_click_model({{ product.id }})"
+                {% else %}
+                  onclick="bid_click_redirect()"
+               {%endif%} style="margin: 0 auto;">Bid On This Item</a>
+             </div>
+          </div>
+      </div>
+    </div>
+    <br><br><br><br><br>
+  {% endfor %}
+  </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Input Your Bid</h4>
+      </div>
+      <form class="" action="{% url 'first_app:input_bid_value' %}" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="usr">Your Bid:</label>
+            <input type="number" class="form-control" id="usr" name="bid_value">
+            <input type="hidden" name="hidden_id" id="hidden_id" value="">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-info" data-dismiss="modal">Submit Bid</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+  function bid_click_redirect(){
+    window.location.assign({% url 'first_app:login' %})
+  }
+
+  function bid_click_model( id ){
+    document.getElementById('hidden_id').value=id;
+    $('#myModal').modal('show');
+  }
+</script>
+{% endblock %}
